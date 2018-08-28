@@ -1,0 +1,30 @@
+2018-08-10 14:19:25,788 django_debug_error 32  [ERROR]  UserProfile matching query does not exist.
+2018-08-10 14:52:04,127 django_debug_error 34  [ERROR]  UserProfile matching query does not exist.
+2018-08-10 14:52:32,757 django_debug_error 34  [ERROR]  UserProfile matching query does not exist.
+2018-08-10 15:12:57,190 django_debug_error 33  [ERROR]  yinhuan@qq.com UserProfile matching query does not exist.
+2018-08-10 15:14:52,476 django_debug_error 33  [ERROR]  username=sdfasdf@asdfasdf message=UserProfile matching query does not exist.
+2018-08-10 15:16:07,957 django_debug_error 34  [ERROR]  username=asdfasdf@asdfasdfasfd 
+                                                        message=UserProfile matching query does not exist.
+2018-08-10 15:17:46,791 django_debug_error 34  [ERROR]  username=yinhuanyi@sadfsadf 
+	*14message=UserProfile matching query does not exist.
+2018-08-10 15:18:47,613 django_debug_error 34  [ERROR]  username=yinasdfasd@asfdasdfas 
+														14message=UserProfile matching query does not exist.
+2018-08-12 05:35:42,417 django_debug_error 40  [ERROR]  Reverse for 'register' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 05:46:36,131 django_debug_error 40  [ERROR]  Reverse for 'register' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 05:48:01,251 django_debug_error 40  [ERROR]  Reverse for 'register' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 05:48:02,810 django_debug_error 40  [ERROR]  Reverse for 'register' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 05:48:32,827 django_debug_error 40  [ERROR]  Reverse for 'register' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 05:48:33,577 django_debug_error 40  [ERROR]  Reverse for 'register' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 06:19:23,397 django_debug_error 40  [ERROR]  Reverse for 'user_info' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 06:25:58,392 django_debug_error 39  [ERROR]  Reverse for 'user_info' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 06:26:00,931 django_debug_error 39  [ERROR]  Reverse for 'user_info' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 06:26:02,855 django_debug_error 39  [ERROR]  Reverse for 'user_info' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 06:26:07,225 django_debug_error 39  [ERROR]  Reverse for 'user_info' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+# 这种问题都是url反解映射的时候，路径映射错误，或者路径映射失败，或者没有这个映射关系
+2018-08-12 06:27:48,907 django_debug_error 39  [ERROR]  Reverse for 'user_info' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2018-08-12 07:12:28,519 django_debug_error 29  [ERROR]  username=yinhuanyi@gmail.com message=UserProfile matching query does not exist.
+2018-08-12 07:15:39,580 django_debug_error 29  [ERROR]  username=yinhuanyi@gmail.com message=UserProfile matching query does not exist.
+2018-08-13 08:09:17,536 django_debug_error 40  [ERROR]  Empty variable tag on line 34
+2018-08-13 08:10:08,845 django_debug_error 40  [ERROR]  Empty variable tag on line 34
+2018-08-13 08:10:09,189 django_debug_error 40  [ERROR]  Empty variable tag on line 34
+2018-08-13 08:18:48,575 django_debug_error 40  [ERROR]  Empty variable tag on line 34

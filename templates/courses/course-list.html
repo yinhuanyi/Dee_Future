@@ -1,0 +1,142 @@
+<!--  -->
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} 公开课 {% endblock %}
+
+<!-- 面包屑部分 -->
+{% block custom_bread %}
+    <section>
+        <div class="wp">
+            <ul class="crumbs">
+                <li><a href="/">首页</a>></li>
+                <li>公开课</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="wp">
+            <div class="list" style="margin-top:0;">
+                <!-- 左边是公开课列表 -->
+                <div class="left layout">
+                    <!-- 头部 -->
+                    <div class="head">
+                        <ul class="tab_header">
+                            <li {% if sort == "new" %}  class="active" {% endif %}><a href="?sort=new">最新 </a></li>
+                            <li {% if sort == "hot" %}  class="active" {% endif %}><a href="?sort=hot">最热门</a></li>
+                            <li {% if sort == "students" %}  class="active" {% endif %}><a
+                                    href="?sort=students">参与人数</a></li>
+                        </ul>
+                    </div>
+                    <!-- 课程列表 -->
+                    <div id="inWindow">
+                        <div class="tab_cont " id="content">
+                            <div class="group_list">
+                                {% for course in all_courses.object_list %}
+                                    <div class="box">
+                                        <a href="{% url 'courses:course_detail' course.id %}">
+                                            <img width="280" height="350" class="scrollLoading"
+                                                 data-url="{{ MEDIA_URL }}{{ course.image }}"
+                                                 src="{% static 'images/pixel.gif' %}"/>
+                                        </a>
+                                        <div class="des">
+                                            <a href="{% url 'courses:course_detail' course.id %}">
+                                                <h2>{{ course.name }}</h2>
+                                            </a>
+                                            <span class="fl">时长：<i class="key">{{ course.learn_times }}</i></span>
+                                            <span class="fr">学习人数：{{ course.students }}&nbsp;&nbsp;</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <a href="org-detail-homepage.html"><span class="fl">{{ course.course_org }}</span></a>
+                                            <span class="star fr  notlogin
+                                        " data-favid="15">
+                                        {{ course.fav_num }}
+                                    </span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- 底部分页需要看看官方文档： https://pypi.python.org/pypi/django-pure-pagination -->
+                            <div class="pageturn">
+
+                                <!-- 显示前一页 -->
+                                {% if all_courses.has_previous %}
+
+                                    <li class="long" style="list-style: none">
+                                        <a href="?{{ all_courses.previous_page_number.querystring }}">上一页</a>
+                                    </li>
+                                {% endif %}
+
+                                <!-- 显示中间的页面 -->
+                                {% for page in all_courses.pages %}
+                                    {% if page %}
+                                        {% ifequal page all_courses.number %}
+                                            <li class="active" style="list-style: none">
+                                                <a>{{ page }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page" style="list-style: none">
+                                                <a href="?{{ page.querystring }}">{{ page }}</a>
+                                            </li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        <li class="none" style="list-style: none">
+                                            <a href="">...</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <!-- 显示末尾页面 -->
+                                {% if all_courses.has_next %}
+                                    <li class="long" style="list-style: none">
+                                        <a href="?{{ all_courses.next_page_number.querystring }}">下一页</a>
+                                    </li>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右边是热门课程推荐列表 -->
+                <div class="right layout">
+                    <div class="head">热门课程推荐</div>
+
+                    <div class="group_recommend">
+
+                        <!-- 开始遍历热门课程 -->
+                        {% for course in hot_courses %}
+                            <dl>
+                                <dt>
+                                    <a target="_blank" href="{{ ecmall_ad.url }}">
+                                        <img width="240" height="220" class="scrollLoading"
+                                             data-url="{{ MEDIA_URL }}{{ course.image }}"
+                                             src="{{ MEDIA_URL }}{{ course.image }}"/>
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <a target="_blank" href="{{ ecmall_ad.url }}"><h2>{{ course.name }}</h2></a>
+                                    <!-- 注意这里的get_degree_display可以显示choice字段的显示名称，而不是数据库中取出的数据名称 -->
+                                    <span class="fl">课程难度：<i class="key">{{ course.get_degree_display }}</i></span>
+                                </dd>
+                            </dl>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
+    {% block custom_css %}
+    {% endblock %}
+    <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+    {% block custom_js %}
+    {% endblock %}
+</head>
+<body>
+<section class="headerwrap headerwrap2">
+    <header>
+        <div class="header2 header">
+
+            {% if request.user.is_authenticated %}
+                <div class="top">
+                    <div class="wp">
+                        <div class="fl"><p>服务电话：<b>18670236750</b></p></div>
+                        <div class="personal">
+                            <dl class="user fr">
+                                <dd>{{ request.user.username }}
+                                    <img class="down fr" src={% static "images/top_down.png" %}/>
+                                </dd>
+                                <dt>
+                                    <img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/>
+                                </dt>
+                            </dl>
+                            <div class="userdetail">
+                                <dl>
+                                    <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
+                                    <dd>
+                                        <h2>{% if request.user.is_superuser %}管理员{% else %}{% endif %}</h2>
+                                        <p>{{ request.user.username }}</p>
+                                    </dd>
+                                </dl>
+                                <div class="btn">
+                                    <a class="personcenter fl" href="">进入个人中心</a>
+                                    <a class="fr" href="{% url 'users:logout' %}">退出</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'users:mymsg' %}">
+                            <div class="msg-num">{{ request.user.get_unread_nums }}</div>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div style="color: #FFFFFF; margin-top: -12px">没有登录</div>
+                <div class="top">
+                    <div class="wp">
+                        <div class="fl">
+                            <p>联系方式：<b>3333333333</b></p>
+                        </div>
+                        <!-- 这里使用路由的name关键字 {% url "users:register" %} -->
+                        <a style="color:white" class="fr registerbtn" href={% url "users:register" %}>注册</a>
+                        <a style="color:white" class="fr loginbtn" href={% url "users:login" %}>登录</a>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="middle companyheader">
+                <div class="wp">
+                    <img class="fl" style="width: 112px;height: 103px" src="{{ MEDIA_URL }}{{ course_org.image }}"/>
+                    <div class="head fl">
+                        <h1>
+                            {{ course_org.name }}
+                            <img src="{% static 'images/authentication.png' %}"/>
+                            <img src="{% static 'images/gold.png' %}"/>
+                        </h1>
+                        <p class="fl">
+                            <span class="fl" style="margin-top:8px;color:#848484;">推荐指数： </span>
+                            <span class="precision company-credit" data-star-scope="5.0"></span>
+                            <span class="key">5.0</span>
+                        </p>
+                    </div>
+
+                    <div class="btn fr collectionbtn  notlogin" data-favid="22" data-fav-type="1">{% if fav_status %} 已收藏 {% else %} 收藏 {% endif %}</div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+</section>
+
+<section>
+    <div class="wp">
+        <ul class="crumbs">
+            <li><a href="{% url 'index' %}">首页</a>></li>
+            <li><a href="{% url 'org:org_list' %}">课程机构</a>></li>
+            <li>{% block page_path %} 课程首页 {% endblock %}</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <div class="wp list personal_list comp">
+
+        <div class="left">
+            <ul>
+                <li {% ifequal current_page "home" %} class="active2" {% endifequal %}><a
+                        href="{% url 'org:org_home' course_org.id %}">机构首页</a></li>
+                <li {% ifequal current_page "course" %} class="active2" {% endifequal %}><a
+                        href="{% url 'org:org_course' course_org.id %}">机构课程</a></li>
+                <li {% ifequal current_page "desc" %} class="active2" {% endifequal %}><a
+                        href="{% url 'org:org_desc' course_org.id %}">机构介绍</a>
+                </li>
+                <li {% ifequal current_page "teacher" %} class="active2" {% endifequal %}><a
+                        href="{% url 'org:org_teacher' course_org.id %}">机构讲师</a></li>
+            </ul>
+        </div>
+
+
+        {% block right_form %}
+
+        {% endblock %}
+    </div>
+
+</section>
+
+<section>
+    <ul class="sidebar">
+        <li class="qq">
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2023525077&site=qq&menu=yes"></a>
+        </li>
+        <li class="totop"></li>
+    </ul>
+</section>
+
+<!--弹出省省市-->
+<script src="{% static 'js/selectUi.js' %}" type='text/javascript'></script>
+<script type="text/javascript" src="{% static 'js/plugins/laydate/laydate.js' %}"></script>
+<script src="{% static 'js/plugins/layer/layer.js' %}"></script>
+<script src="{% static 'js/plugins/queryCity/js/public.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/unslider.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/plugins/jquery.scrollLoading.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/validateDialog.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/deco-common.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'js/plugins/jquery.raty.js' %}"></script>
+<script type="text/javascript">
+    // 这个js控制那推荐指数的✨ ✨
+    $(function () {
+        var $precision = $('.precision'),
+            score = $precision.attr('data-star-scope'),
+            option = {
+                half: true,
+                path: "{% static 'images/' %}",
+                precision: true,
+                size: 24,
+                starOff: 'g_star.png',
+                starOn: 'r_star.png',
+                starHalf: 'h_star.png',
+                hints: ['极差', '差', '一般', '好评', '非常满意'],
+                noRatedMsg: '暂时还未获得评价！',
+                readOnly: true,
+                score: score
+            };
+
+        $precision.raty(option);
+
+        $('.jsFavBtn').on('click', function () {
+            var type = $(this).attr('data-fav-type');
+            if (type == '1') {
+                favPraise($(this), 'fav', 1, '收藏');
+
+            } else if (type == '3') {
+                favPraise($(this), 'fav', 3);
+
+            } else if (type == '11') {
+                favPraise($(this), 'pra', 1);
+
+            } else if (type == '4') {
+                favPraise($(this), 'fav', 4);
+
+            }
+        });
+    })
+
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.recordbtn1').click(function () {
+            $('.recordbox1').show();
+        });
+        $('.recordbtn2').click(function () {
+            $('.recordbox2').show();
+        });
+
+        $('.imgslide').unslider({
+            speed: 500,
+            delay: 3000,
+            complete: function () {
+            },
+            keys: true,
+            dots: true,
+            fluid: false
+        });
+        var unslider = $('.imgslide').unslider();
+        $('.unslider-arrow').click(function () {
+            var fn = this.className.split(' ')[1];
+            unslider.data('unslider')[fn]();
+        });
+    });
+</script>
+
+<!-- 处理收藏和取消的ajax -->
+<script>
+    // 被调用的ajax请求函数
+    let add_fav = function (current_elem, fav_id, fav_type) {
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: "{% url 'org:add_fav' %}",
+            data: {'fav_id': fav_id, 'fav_type': fav_type},
+            async: true,
+            dataType: 'json',
+            beforeSend: function (xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}"); // 其实在这里，如果按钮使用的form标签包裹起来的话，也可以在form中使用csrf_token即可
+            },
+            success: function (data) {
+
+                if (data.status == "fail") {
+                    if (data.msg == '您还未登入，请先登录') {
+                        window.location.href = '/login/';
+                    } else {
+
+                        current_elem.text(data.msg)
+                    };
+                } else {
+                    current_elem.text(data.msg)
+                }
+            },
+            error: function (data) {
+                console.log('请求数据失败');
+
+            },
+        });
+    };
+
+    // 监听收藏按钮的点击事件
+    $(".collectionbtn").on('click', function () {
+        add_fav($(this), {{ course_org.id }}, 2);  // 由于这里是开发的授课机构，所以fav_type为2，收藏的是授课结构
+    });
+
+
+</script>
+</body>
+</html>
