@@ -28,10 +28,10 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = 'pwyqs_50igab%^4=9p$#li-b=4wos$o*6r2gt#4b2rzqsfi8%j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = []
+DEBUG = False
+#DEBUG = True
+ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -94,8 +94,8 @@ WSGI_APPLICATION = 'Future_Edu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'future_edu',
-        'USER': 'yinhuanyi',
+        'NAME': 'Dee_Future',
+        'USER': 'dee_future',
         'PASSWORD': 'yhy3426356',
         'HOST': '127.0.0.1',
         'PORT': 3306,
@@ -140,8 +140,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )  # 开发环境打开，生产环境注释
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")         # 生产环境打开，开发环境注释
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )  # 开发环境打开，生产环境注释
+STATIC_ROOT = os.path.join(BASE_DIR, "static")         # 生产环境打开，开发环境注释
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
